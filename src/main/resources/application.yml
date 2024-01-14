@@ -1,0 +1,17 @@
+#Springboot -- auto configuartion feature. url,username,pwd provided by springboot
+#HikariPool -- its a pool connection thread lives there.. is dedicated for
+#database connection object. it's expandable. load is higher it will generate more threads
+spring:
+  datasource:
+    url: jdbc:h2:./appdb
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
