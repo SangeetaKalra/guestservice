@@ -18,24 +18,27 @@ public class GuestBookService {
     private final GuestRepo repo;
     private final AddressRepo addressRepo;
     private final ReviewRepo reviewRepo;
-    public List<Guest> getAllGuests(){
-        return repo.findAll();
-    }
-
-    public Optional<Guest> getGuestById(Integer id){
-        return repo.findById(id);
-    }
-
-    public Optional<Guest> getByFirstName(String firstName){
-        return repo.findGuestsByFirstName(firstName);
-    }
 
     public Guest addOrUpdateGuest(Guest guest){
         return repo.save(guest);
     }
 
+    public List<Guest> getAllGuests(){
+        return repo.findAll();
+    }
+
+    public Optional<Guest> getGuestById(Integer id){
+
+        return repo.findById(id);
+
+    }
+
+    public Optional<Guest> getGuestByFirstName(String firstName){
+        return repo.findGuestsByFirstName(firstName);
+    }
+
     public Optional<Guest> deleteGuestById(Integer id){
-        Optional<Guest> guestById=getGuestById(id);
+        Optional<Guest> guestById = repo.findById(id);
         if(guestById.isPresent()){
             repo.deleteById(id);
             return guestById;
@@ -44,9 +47,8 @@ public class GuestBookService {
     }
 
     public Optional<Guest> updateGuest(Guest guest){
-        Optional<Guest> guestById=getGuestById(guest.getGuestId());
+        Optional<Guest> guestById = repo.findById(guest.getGuestId());
         if(guestById.isPresent()){
-            addOrUpdateGuest(guest);
             return Optional.of(addOrUpdateGuest(guest));
         }
         return Optional.empty();

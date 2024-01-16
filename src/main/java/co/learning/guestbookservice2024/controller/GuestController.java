@@ -22,13 +22,13 @@ public class GuestController {
     }
 
     @GetMapping("/all/{id}")
-    public Optional<Guest> getById(@PathVariable("id") Integer id){
+    public Optional<Guest> getById(@PathVariable("id")Integer id){
         return service.getGuestById(id);
     }
 
     @GetMapping("/allByName/{firstName}")
-    public Optional<Guest> getByFirstName(@PathVariable("firstName") String firstName){
-        return service.getByFirstName(firstName);
+    public Optional<Guest> getByFirstName(@PathVariable("firstName")String firstName){
+        return service.getGuestByFirstName(firstName);
     }
 
     @PostMapping("/add")
@@ -41,17 +41,17 @@ public class GuestController {
         ResponseEntity<Guest> guestResponseEntity;
         Optional<Guest> optionalGuest = service.updateGuest(guest);
         if(optionalGuest.isPresent()){
-            guestResponseEntity=ResponseEntity.ok(guest);
-        }else {
-            guestResponseEntity=ResponseEntity.noContent()
-                    .header("error message","Guest didnt found for id: " +guest.getGuestId()).build();
-
+            guestResponseEntity = ResponseEntity.ok(guest);
         }
+        else{
+            guestResponseEntity = ResponseEntity.noContent().header("error message","Guest didn't found for id: "+guest.getGuestId()).build();
+        }
+
         return guestResponseEntity;
     }
 
     @DeleteMapping("/delete/{id}")
-    public Optional<Guest> deleteById(@PathVariable("id") Integer id){
+    public Optional<Guest> deleteById(@PathVariable("id")Integer id){
         return service.deleteGuestById(id);
     }
 
