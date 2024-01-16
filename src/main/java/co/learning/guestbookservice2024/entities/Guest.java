@@ -17,14 +17,17 @@ import java.util.List;
 public class Guest {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int guestId;
+    private Integer guestId;
     private String firstName;
     private String lastName;
-    @OneToOne
-    @JoinColumn(name="addressId")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id",referencedColumnName = "id")
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @Builder.Default
+    private boolean active = true;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Review> reviews;
 
     @Transient
