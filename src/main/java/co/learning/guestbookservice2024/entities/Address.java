@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long addressId;
+    private long id;
     private String city;
     private String postalCode;
 
